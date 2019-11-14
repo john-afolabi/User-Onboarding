@@ -4,8 +4,6 @@ import * as Yup from "yup";
 import axios from "axios";
 
 function UserForm(props) {
-  console.log(props);
-
   return (
     <div className="formik-form">
       <Form>
@@ -58,7 +56,19 @@ const UserFormWithFormik = withFormik({
       .min(8, "Password should be 8 characters minimum")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     tos: Yup.boolean()
-  })
+  }),
+
+  handleSubmit(users, tools) {
+    axios
+      .post("https://reqres.in/api/users", users)
+      .then(res => {
+        console.log(res.data);
+        tools.resetForm();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 })(UserForm);
 
 export default UserFormWithFormik;
