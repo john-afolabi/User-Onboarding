@@ -1,14 +1,16 @@
 import React from "react";
+import { Card, CardTitle, CardSubtitle } from "reactstrap";
+import './users.css'
 
 function Users(props) {
   return (
-    <div>
+    <div className="card-container">
       {props.usersArray.map(user => {
         return (
-          <div key={user.id}>
-            <p>{user.name}</p>
-            <p>{user.email}</p>
-          </div>
+          <Card key={user.id}>
+            <CardTitle>{user.name}</CardTitle>
+            <CardSubtitle>{user.email}</CardSubtitle>
+          </Card>
         );
       })}
     </div>

@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
-import UserFormWithFormik from './components/Form'
-import Users from './components/Users';
+import React, { useState } from "react";
+import UserFormWithFormik from "./components/Form";
+import Users from "./components/Users";
+import { Container } from "reactstrap";
 
 function App() {
   const [usersArray, setUsersArray] = useState([]);
 
   return (
-    <div>
-    <UserFormWithFormik usersArray={usersArray} setUsersArray={setUsersArray}/>
-    <Users usersArray={usersArray}/>
-    </div>
+    <Container>
+      <UserFormWithFormik
+        usersArray={usersArray}
+        setUsersArray={setUsersArray}
+      />
+      <Users usersArray={usersArray} />
+    </Container>
   );
 }
 

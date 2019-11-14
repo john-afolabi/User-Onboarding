@@ -1,39 +1,57 @@
 import React, { useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
+import { Button, FormGroup, Label, Input, FormText, Alert } from "reactstrap";
 import * as Yup from "yup";
 import axios from "axios";
 
 function UserForm(props) {
-  
-
   return (
     <div className="formik-form">
       <Form>
-        <ErrorMessage name="name" render={msg => <div>{msg}</div>} />
-        <label>
-          Name:
-          <Field type="text" name="name" />
-        </label>
-        <br />
-        <ErrorMessage name="email" render={msg => <div>{msg}</div>} />
-        <label>
-          Email:
-          <Field type="text" name="email" />
-        </label>
-        <br />
-        <ErrorMessage name="password" render={msg => <div>{msg}</div>} />
-        <label>
-          Password:
-          <Field type="password" name="password" />
-        </label>
-        <br />
-        <ErrorMessage name="tos" render={msg => <div>{msg}</div>} />
-        <label>
-          TOS:
-          <Field type="checkbox" name="tos" />
-        </label>
-        <br />
-        <input type="submit" />
+        <FormGroup>
+          <ErrorMessage
+            name="name"
+            render={msg => <Alert color="danger">{msg}</Alert>}
+          />
+          <Label>
+            Name:
+            <Input tag={Field} type="text" name="name" />
+          </Label>
+        </FormGroup>
+        <FormGroup>
+          <ErrorMessage
+            name="email"
+            render={msg => <Alert color="danger">{msg}</Alert>}
+          />
+          <Label>
+            Email:
+            <Input tag={Field} type="text" name="email" />
+          </Label>
+        </FormGroup>
+        <FormGroup>
+          <ErrorMessage
+            name="password"
+            render={msg => <Alert color="danger">{msg}</Alert>}
+          />
+          <Label>
+            Password:
+            <Input
+              tag={Field}
+              type="password"
+              name="password"
+            />
+          </Label>
+        </FormGroup>
+        <FormGroup check>
+          <ErrorMessage
+            name="tos"
+            render={msg => <Alert color="danger">{msg}</Alert>}
+          />
+          <Label check>
+            <Input tag={Field} name="tos" type="checkbox" /> Terms of Service
+          </Label>
+        </FormGroup>
+        <Button>Submit</Button>
       </Form>
     </div>
   );
