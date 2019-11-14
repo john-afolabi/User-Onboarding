@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
 function UserForm(props) {
+  
+
   return (
     <div className="formik-form">
       <Form>
@@ -25,6 +27,7 @@ function UserForm(props) {
           <Field type="password" name="password" />
         </label>
         <br />
+        <ErrorMessage name="tos" render={msg => <div>{msg}</div>} />
         <label>
           TOS:
           <Field type="checkbox" name="tos" />
@@ -55,7 +58,7 @@ const UserFormWithFormik = withFormik({
       .required("Password required")
       .min(8, "Password should be 8 characters minimum")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-    tos: Yup.boolean()
+    tos: Yup.boolean().oneOf([true], "You must agree to terms of service!")
   }),
 
   handleSubmit(users, tools) {
@@ -63,6 +66,7 @@ const UserFormWithFormik = withFormik({
       .post("https://reqres.in/api/users", users)
       .then(res => {
         console.log(res.data);
+        tools.props.setUsersArray(tools.props.usersArray.concat(res.data));
         tools.resetForm();
       })
       .catch(err => {
